@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in Legal Services (LegalTech) - Comprehensive Use Cases</title>
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #a78bfa;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --legal-purple: #6366f1;
+            --justice-gold: #f59e0b;
+            --court-blue: #3b82f6;
+            --document-green: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), #0b1220);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--legal-purple), var(--justice-gold), var(--court-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-color: var(--primary-color);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, var(--legal-purple), var(--court-blue));
+            border: none;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--legal-purple), var(--court-blue), var(--justice-gold));
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .icon.ml { background: rgba(99, 102, 241, 0.2); color: var(--legal-purple); }
+        .icon.gen { background: rgba(59, 130, 246, 0.2); color: var(--court-blue); }
+        .icon.ag { background: rgba(245, 158, 11, 0.2); color: var(--justice-gold); }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--legal-purple), var(--court-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-diagram {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .architecture-item::before {
+            content: '→';
+            color: var(--legal-purple);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(59, 130, 246, 0.1));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-title {
+            color: var(--legal-purple);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--legal-purple);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .legal-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .justice-badge {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        .court-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚖️ AI in Legal Services (LegalTech)</h1>
+            <p class="subtitle">Comprehensive Guide to Machine Learning, Generative AI, and Agentic Systems in Law & Legal Practice</p>
+        </header>
+
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection('ml')">🔮 ML / Predictive</button>
+            <button class="nav-btn" onclick="showSection('gen')">✍️ Generative AI</button>
+            <button class="nav-btn" onclick="showSection('agentic')">🤖 Agentic AI</button>
+        </div>
+
+        <!-- ML / Predictive Use Cases -->
+        <div id="ml" class="content-section active">
+            <h2 class="section-title">🔮 Machine Learning & Predictive Analytics</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Advanced statistical models and algorithms for legal risk assessment, case outcomes, and practice optimization
+            </p>
+
+            <div class="card-grid">
+                <!-- Case Outcome Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⚖️</div>
+                        <div>
+                            <div class="card-title">Case Outcome Prediction</div>
+                            <div class="card-subtitle">Litigation Analytics</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict case outcomes and litigation success probabilities using historical case data, judge patterns, and legal precedents.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Predictive Analytics</span>
+                            <span class="tech-tag">Case Analysis</span>
+                            <span class="tech-tag">Legal Precedents</span>
+                            <span class="tech-tag">Judge Behavior</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Case Data → Legal Analysis → Precedent Matching → Judge Patterns → Outcome Prediction → Strategy</div>
+                            <div class="architecture-item">Historical Cases → Similarity Analysis → Success Factors → Probability Modeling → Recommendations</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical case outcomes</li>
+                                <li>Legal precedents database</li>
+                                <li>Judge decision patterns</li>
+                                <li>Court jurisdiction data</li>
+                                <li>Case complexity factors</li>
+                                <li>Legal representation quality</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">75-85%</div>
+                                <div class="metric-label">Prediction Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Case Strategy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Settlement Success</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Litigation Risk Modeling -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⚠️</div>
+                        <div>
+                            <div class="card-title">Litigation Risk Modeling</div>
+                            <div class="card-subtitle">Risk Assessment</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Assess litigation risks and potential liabilities for businesses and individuals to inform legal strategy and decision-making.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Risk Modeling</span>
+                            <span class="tech-tag">Liability Assessment</span>
+                            <span class="tech-tag">Financial Impact</span>
+                            <span class="tech-tag">Legal Exposure</span>
+                            <span class="tech-tag">Strategic Planning</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Case Facts → Legal Analysis → Risk Assessment → Financial Impact → Strategy → Mitigation</div>
+                            <div class="architecture-item">Evidence Review → Precedent Analysis → Exposure Modeling → Risk Scoring → Recommendations</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Case fact patterns</li>
+                                <li>Legal exposure data</li>
+                                <li>Financial impact models</li>
+                                <li>Historical litigation outcomes</li>
+                                <li>Industry-specific risks</li>
+                                <li>Regulatory compliance data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Risk Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Cost Reduction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Strategic Value</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contract Risk Scoring -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">📄</div>
+                        <div>
+                            <div class="card-title">Contract Risk Scoring</div>
+                            <div class="card-subtitle">Contract Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Analyze contracts to identify potential risks, unfavorable terms, and compliance issues using natural language processing and legal expertise.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Contract Analysis</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">NLP Processing</span>
+                            <span class="tech-tag">Compliance Checking</span>
+                            <span class="tech-tag">Term Analysis</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Contract Text → NLP Analysis → Risk Identification → Compliance Check → Scoring → Recommendations</div>
+                            <div class="architecture-item">Clause Analysis → Risk Pattern → Legal Standards → Risk Scoring → Mitigation</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Contract template libraries</li>
+                                <li>Risk clause databases</li>
+                                <li>Legal compliance standards</li>
+                                <li>Industry-specific requirements</li>
+                                <li>Historical contract disputes</li>
+                                <li>Regulatory frameworks</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Risk Detection</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Compliance Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Review Efficiency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settlement Value Estimation -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">💰</div>
+                        <div>
+                            <div class="card-title">Settlement Value Estimation</div>
+                            <div class="card-subtitle">Financial Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Estimate fair settlement values based on case facts, precedents, damages, and litigation costs to guide negotiation strategies.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Financial Modeling</span>
+                            <span class="tech-tag">Settlement Analysis</span>
+                            <span class="tech-tag">Damage Assessment</span>
+                            <span class="tech-tag">Cost-Benefit Analysis</span>
+                            <span class="tech-tag">Negotiation Strategy</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Case Facts → Damage Assessment → Precedent Analysis → Cost Analysis → Settlement Estimation → Strategy</div>
+                            <div class="architecture-item">Liability Analysis → Financial Impact → Risk Assessment → Settlement Range → Negotiation</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical settlement data</li>
+                                <li>Damage assessment models</li>
+                                <li>Legal cost analysis</li>
+                                <li>Case outcome probabilities</li>
+                                <li>Industry benchmarks</li>
+                                <li>Jurisdictional factors</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">75-85%</div>
+                                <div class="metric-label">Estimation Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Settlement Success</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Litigation Costs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compliance Risk Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">✅</div>
+                        <div>
+                            <div class="card-title">Compliance Risk Prediction</div>
+                            <div class="card-subtitle">Regulatory Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict compliance risks and regulatory violations using business operations data and regulatory frameworks.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Compliance Monitoring</span>
+                            <span class="tech-tag">Regulatory Analysis</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Audit Preparation</span>
+                            <span class="tech-tag">Policy Compliance</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Business Data → Regulatory Analysis → Risk Assessment → Compliance Check → Prediction → Mitigation</div>
+                            <div class="architecture-item">Operations Review → Regulation Mapping → Risk Scoring → Compliance Planning → Monitoring</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Regulatory frameworks</li>
+                                <li>Business operation data</li>
+                                <li>Compliance audit results</li>
+                                <li>Industry standards</li>
+                                <li>Historical violations</li>
+                                <li>Policy documents</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Risk Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Compliance Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Audit Efficiency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legal Spend Forecasting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">📊</div>
+                        <div>
+                            <div class="card-title">Legal Spend Forecasting</div>
+                            <div class="card-subtitle">Financial Planning</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Forecast legal expenses and budget requirements based on case complexity, duration, and historical spending patterns.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Financial Forecasting</span>
+                            <span class="tech-tag">Budget Planning</span>
+                            <span class="tech-tag">Cost Analysis</span>
+                            <span class="tech-tag">Spend Optimization</span>
+                            <span class="tech-tag">Resource Allocation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Case Data → Cost Analysis → Duration Prediction → Spend Forecasting → Budget Planning → Optimization</div>
+                            <div class="architecture-item">Historical Data → Trend Analysis → Scenario Planning → Budget Allocation → Monitoring</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical legal spend data</li>
+                                <li>Case complexity metrics</li>
+                                <li>Duration patterns</li>
+                                <li>Resource allocation data</li>
+                                <li>External counsel costs</li>
+                                <li>Case outcome correlations</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Forecast Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Cost Optimization</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Budget Accuracy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generative AI Use Cases -->
+        <div id="gen" class="content-section">
+            <h2 class="section-title">✍️ Generative AI Applications</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                AI-powered content creation, legal documentation, and research for modern legal practice and client service
+            </p>
+
+            <div class="card-grid">
+                <!-- Contract Drafting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📄</div>
+                        <div>
+                            <div class="card-title">Contract Drafting</div>
+                            <div class="card-subtitle">Legal Documentation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive legal contracts and agreements tailored to specific business needs and legal requirements.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Contract Generation</span>
+                            <span class="tech-tag">Legal Templates</span>
+                            <span class="tech-tag">Compliance Checking</span>
+                            <span class="tech-tag">Customization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Client Requirements → Template Selection → Customization → Legal Review → Generation → Finalization</div>
+                            <div class="architecture-item">Business Needs → Legal Standards → Contract Terms → Risk Assessment → Documentation</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Legal contract templates</li>
+                                <li>Industry-specific requirements</li>
+                                <li>Regulatory compliance standards</li>
+                                <li>Client business information</li>
+                                <li>Legal precedent databases</li>
+                                <li>Risk assessment frameworks</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Draft Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Drafting Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4-6 hours</div>
+                                <div class="metric-label">Contract Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legal Brief Summarization -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📋</div>
+                        <div>
+                            <div class="card-title">Legal Brief Summarization</div>
+                            <div class="card-subtitle">Case Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive summaries of legal briefs, court opinions, and case documents for efficient case preparation and analysis.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Document Analysis</span>
+                            <span class="tech-tag">Case Summarization</span>
+                            <span class="tech-tag">Legal Research</span>
+                            <span class="tech-tag">Brief Preparation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Legal Documents → Analysis → Key Points → Summarization → Case Strategy → Preparation</div>
+                            <div class="architecture-item">Document Review → Issue Identification → Legal Analysis → Summary Generation → Strategy</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Legal brief databases</li>
+                                <li>Court opinion records</li>
+                                <li>Case law references</li>
+                                <li>Legal terminology</li>
+                                <li>Precedent analysis</li>
+                                <li>Case strategy frameworks</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Summary Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Case Preparation</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">5-10 minutes</div>
+                                <div class="metric-label">Brief Summarization</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Due Diligence Reports -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🔍</div>
+                        <div>
+                            <div class="card-title">Due Diligence Reports</div>
+                            <div class="card-subtitle">Investigation Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive due diligence reports analyzing legal risks, compliance issues, and business liabilities.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Due Diligence</span>
+                            <span class="tech-tag">Risk Analysis</span>
+                            <span class="tech-tag">Compliance Review</span>
+                            <span class="tech-tag">Investigation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Investigation Data → Risk Analysis → Compliance Review → Report Generation → Recommendations → Review</div>
+                            <div class="architecture-item">Document Review → Legal Analysis → Risk Assessment → Report Drafting → Finalization</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Business entity records</li>
+                                <li>Legal compliance data</li>
+                                <li>Risk assessment frameworks</li>
+                                <li>Financial records</li>
+                                <li>Contract analysis</li>
+                                <li>Regulatory requirements</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Report Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Investigation Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">6-8 hours</div>
+                                <div class="metric-label">Report Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compliance Documentation -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">✅</div>
+                        <div>
+                            <div class="card-title">Compliance Documentation</div>
+                            <div class="card-subtitle">Regulatory Requirements</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive compliance documentation and regulatory reports for various industries and legal requirements.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Compliance Reporting</span>
+                            <span class="tech-tag">Regulatory Analysis</span>
+                            <span class="tech-tag">Documentation</span>
+                            <span class="tech-tag">Audit Preparation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Regulatory Requirements → Compliance Analysis → Documentation → Review → Approval → Submission</div>
+                            <div class="architecture-item">Policy Review → Gap Analysis → Implementation → Reporting → Monitoring → Improvement</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Regulatory frameworks</li>
+                                <li>Compliance standards</li>
+                                <li>Industry requirements</li>
+                                <li>Policy documents</li>
+                                <li>Audit requirements</li>
+                                <li>Reporting templates</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Compliance Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Documentation Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">6-8 hours</div>
+                                <div class="metric-label">Report Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Communication Drafts -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">💬</div>
+                        <div>
+                            <div class="card-title">Client Communication</div>
+                            <div class="card-subtitle">Legal Correspondence</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate professional client communications, legal letters, and case updates tailored to client needs and legal context.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Client Communication</span>
+                            <span class="tech-tag">Legal Correspondence</span>
+                            <span class="tech-tag">Case Updates</span>
+                            <span class="tech-tag">Professional Writing</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Client Information → Case Status → Communication Needs → Draft Generation → Review → Delivery</div>
+                            <div class="architecture-item">Legal Context → Client Understanding → Message Drafting → Professional Review → Communication</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Client case information</li>
+                                <li>Communication preferences</li>
+                                <li>Legal terminology</li>
+                                <li>Professional standards</li>
+                                <li>Case status updates</li>
+                                <li>Client relationship data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Communication Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Client Satisfaction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">3-5 minutes</div>
+                                <div class="metric-label">Communication Drafting</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legal Research Memos -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📚</div>
+                        <div>
+                            <div class="card-title">Legal Research Memos</div>
+                            <div class="card-subtitle">Case Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive legal research memos analyzing case law, statutes, and legal precedents for case preparation.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Legal Research</span>
+                            <span class="tech-tag">Case Analysis</span>
+                            <span class="tech-tag">Precedent Review</span>
+                            <span class="tech-tag">Legal Writing</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Research Questions → Case Law Analysis → Statute Review → Memo Generation → Analysis → Recommendations</div>
+                            <div class="architecture-item">Legal Issues → Research → Analysis → Writing → Review → Finalization</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Case law databases</li>
+                                <li>Statutory law references</li>
+                                <li>Legal research tools</li>
+                                <li>Precedent analysis</li>
+                                <li>Legal writing standards</li>
+                                <li>Case strategy frameworks</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Research Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Case Preparation</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4-6 hours</div>
+                                <div class="metric-label">Memo Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentic AI Use Cases -->
+        <div id="agentic" class="content-section">
+            <h2 class="section-title">🤖 Agentic AI Systems</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Autonomous AI agents that can reason, plan, and execute complex legal workflows and case management operations
+            </p>
+
+            <div class="card-grid">
+                <!-- Contract Lifecycle Management Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">📄</div>
+                        <div>
+                            <div class="card-title">Contract Lifecycle Management</div>
+                            <div class="card-subtitle">Document Workflow</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Manage the complete contract lifecycle from creation and negotiation to execution and renewal with automated tracking and compliance monitoring.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Contract Management</span>
+                            <span class="tech-tag">Workflow Automation</span>
+                            <span class="tech-tag">Compliance Monitoring</span>
+                            <span class="tech-tag">Renewal Tracking</span>
+                            <span class="tech-tag">Document Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Contract Creation → Negotiation → Approval → Execution → Monitoring → Renewal → Archiving</div>
+                            <div class="architecture-item">Template Selection → Customization → Review → Signatures → Tracking → Compliance → Management</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Contract templates and clauses</li>
+                                <li>Approval workflows</li>
+                                <li>Signature tracking systems</li>
+                                <li>Compliance requirements</li>
+                                <li>Renewal schedules</li>
+                                <li>Contract performance data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Contract Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Compliance Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Renewal Success</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Litigation Workflow Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">⚖️</div>
+                        <div>
+                            <div class="card-title">Litigation Workflow</div>
+                            <div class="card-subtitle">Case Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate and optimize litigation workflows including document management, deadline tracking, and case strategy coordination.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Case Management</span>
+                            <span class="tech-tag">Workflow Automation</span>
+                            <span class="tech-tag">Deadline Tracking</span>
+                            <span class="tech-tag">Document Organization</span>
+                            <span class="tech-tag">Strategy Coordination</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Case Intake → Document Collection → Deadline Management → Strategy Development → Court Filings → Trial Preparation → Resolution</div>
+                            <div class="architecture-item">Client Information → Evidence Gathering → Legal Research → Filing Management → Court Coordination → Case Tracking</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Case management systems</li>
+                                <li>Court filing requirements</li>
+                                <li>Deadline tracking</li>
+                                <li>Document organization</li>
+                                <li>Legal strategy frameworks</li>
+                                <li>Client communication logs</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Workflow Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-95%</div>
+                                <div class="metric-label">Deadline Compliance</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Case Organization</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E-discovery Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🔍</div>
+                        <div>
+                            <div class="card-title">E-discovery</div>
+                            <div class="card-subtitle">Digital Investigation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate electronic discovery processes including document collection, review, and production for litigation and investigations.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">E-discovery</span>
+                            <span class="tech-tag">Document Review</span>
+                            <span class="tech-tag">Data Collection</span>
+                            <span class="tech-tag">Privilege Review</span>
+                            <span class="tech-tag">Production Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Data Collection → Processing → Review → Analysis → Production → Presentation</div>
+                            <div class="architecture-item">Electronic Data → Filtering → Review → Categorization → Production → Court Submission</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Electronic data sources</li>
+                                <li>Document review protocols</li>
+                                <li>Privilege identification</li>
+                                <li>Production requirements</li>
+                                <li>Review workflows</li>
+                                <li>Compliance standards</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Document Review</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Review Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Compliance Accuracy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Research Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">📚</div>
+                        <div>
+                            <div class="card-title">Case Research</div>
+                            <div class="card-subtitle">Legal Investigation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Conduct comprehensive legal research including case law analysis, statutory research, and precedent identification for case preparation.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Legal Research</span>
+                            <span class="tech-tag">Case Analysis</span>
+                            <span class="tech-tag">Precedent Research</span>
+                            <span class="tech-tag">Statutory Analysis</span>
+                            <span class="tech-tag">Legal Investigation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Research Questions → Database Search → Case Analysis → Precedent Review → Legal Analysis → Report Generation</div>
+                            <div class="architecture-item">Legal Issues → Research → Analysis → Synthesis → Application → Strategy</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Legal research databases</li>
+                                <li>Case law repositories</li>
+                                <li>Statutory law databases</li>
+                                <li>Legal precedent libraries</li>
+                                <li>Research protocols</li>
+                                <li>Analysis frameworks</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Research Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Research Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Precedent Accuracy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Due Diligence Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">📋</div>
+                        <div>
+                            <div class="card-title">Due Diligence</div>
+                            <div class="card-subtitle">Investigation Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Conduct comprehensive due diligence investigations including background checks, financial analysis, and legal compliance reviews.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Due Diligence</span>
+                            <span class="tech-tag">Background Investigation</span>
+                            <span class="tech-tag">Financial Analysis</span>
+                            <span class="tech-tag">Compliance Review</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Investigation Scope → Data Collection → Analysis → Risk Assessment → Report Generation → Recommendations</div>
+                            <div class="architecture-item">Entity Review → Financial Analysis → Legal Review → Compliance Check → Risk Assessment → Reporting</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Business entity databases</li>
+                                <li>Financial record sources</li>
+                                <li>Legal compliance frameworks</li>
+                                <li>Risk assessment protocols</li>
+                                <li>Background check sources</li>
+                                <li>Industry analysis data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Investigation Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Investigation Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Risk Detection</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legal Intake Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">📞</div>
+                        <div>
+                            <div class="card-title">Legal Intake</div>
+                            <div class="card-subtitle">Client Onboarding</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate client intake processes including initial consultations, case assessment, and matter setup with intelligent screening and routing.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Client Intake</span>
+                            <span class="tech-tag">Case Assessment</span>
+                            <span class="tech-tag">Matter Setup</span>
+                            <span class="tech-tag">Intelligent Routing</span>
+                            <span class="tech-tag">Client Screening</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Client Contact → Initial Assessment → Case Classification → Attorney Assignment → Matter Setup → Documentation</div>
+                            <div class="architecture-item">Intake Form → Screening → Assessment → Routing → Assignment → Onboarding</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Client intake forms</li>
+                                <li>Case classification criteria</li>
+                                <li>Attorney expertise databases</li>
+                                <li>Matter management systems</li>
+                                <li>Conflict checking protocols</li>
+                                <li>Client screening criteria</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Intake Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Case Classification</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Client Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>✨ Built with cutting-edge AI technologies for the future of legal services and justice</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+                Note: Implementation requires careful consideration of attorney-client privilege, confidentiality, and legal ethics
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find and activate the clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
